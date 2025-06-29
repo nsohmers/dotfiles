@@ -1,0 +1,58 @@
+@import url(hacks/sideberyMods.css);
+
+
+@import url(hacks/button_effect_scale_onclick.css);
+@import url(hacks/hide_toolbox_top_bottom_borders.css);
+
+@import url(hacks/minimal_text_fields.css);
+@import url(hacks/minimal_toolbarbuttons.css);
+
+@import url(hacks/urlHighlight.css);
+
+@import url(hacks/menuShow.css); 
+@import url(hacks/darkContextMenu.css);
+
+
+:root {
+	--tab-max-height: 30px !important;
+	--tab-min-height: 0 !important;
+	--urlbar-toolbar-height: var(--tab-max-height) !important;
+}
+
+
+#TabsToolbar, #sidebar-header, #sidebar-splitter {
+	display: none;
+}
+
+/* Bar resizing */
+#nav-bar,
+.toolbar-items,
+.titlebar-buttonbox-container,
+.tab-content,
+.tab-background,
+.tab-label-container {
+	height: var(--tab-max-height);
+}
+.tab-background {
+	margin: 0 !important;
+}
+.tab-secondary-label {
+	font-size: .5em !important;
+	margin: -.6em 0 .5em !important;
+}
+
+/* Selection highlight */
+#nav-bar toolbaritem,
+#nav-bar toolbarbutton {
+	--focus-outline: none;
+	--slimbar-highlight-color: color-mix(in srgb, var(--lwt-toolbar-field-highlight) 40%, var(--toolbar-bgcolor));
+	/* --toolbar-field-focus-background-color: var(--slimbar-highlight-color); */
+}
+#nav-bar toolbaritem:focus-visible,
+#nav-bar toolbarbutton:focus-visible,
+#nav-bar toolbaritem #identity-icon-box:focus-visible,
+#nav-bar toolbaritem #star-button-box:focus-visible,
+#nav-bar toolbaritem .unified-extensions-item-action-button:focus-visible {
+	background-color: var(--slimbar-highlight-color) !important;
+}
+
