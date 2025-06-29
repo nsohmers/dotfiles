@@ -28,6 +28,9 @@ zinit light jeffreytse/zsh-vi-mode
 autoload -Uz compinit
 compinit
 
+export GPG_TTY=$(tty)
+gpgconf --launch gpg-agent
+
 eval `ssh-agent -s` >/dev/null 2>&1
 ssh-add ~/.ssh/*_ed >/dev/null 2>&1
 
@@ -52,7 +55,6 @@ alias google-java-format='java -jar ~/.m2/repository/com/google/googlejavaformat
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
 #pokemon-colorscripts --no-title -s -r
-
 
 ### From this line is for pywal-colors
 # Import colorscheme from 'wal' asynchronously
@@ -94,14 +96,10 @@ source <(fzf --zsh)
 
 eval "$(zoxide init --cmd cd zsh)"
 
-# Created by `pipx` on 2024-06-10 23:59:21
-export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
-
 export PATH="$PATH:/home/nsohmers/.local/bin"
 if [ -f "/home/nsohmers/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/nsohmers/.config/fabric/fabric-bootstrap.inc"; fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export PATH="$HOME/bin:$PATH"

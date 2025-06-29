@@ -1,12 +1,12 @@
 [user]
 	email = nikolai@sohmers.com
 	name = Nikolai Sohmers
-	signingkey = 00695157
+	signingkey = A7E27E9800695157
 [init]
 	defaultBranch = main
 [core]
 	editor = nvim
 [commit]
-	gpgSign = true
+	gpgsign = true
 [tag]
 	gpgSign = true
