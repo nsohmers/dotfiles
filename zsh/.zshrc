@@ -32,7 +32,9 @@ export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 
 eval `ssh-agent -s` >/dev/null 2>&1
-ssh-add ~/.ssh/*_ed >/dev/null 2>&1
+for key in ~/.ssh/*_ed(N); do
+  ssh-add "$key" >/dev/null 2>&1
+done
 
 ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.79.71.102" >/dev/null 2>&1
 ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.99.71.102" >/dev/null 2>&1

@@ -17,8 +17,15 @@ brew "gh"
 brew "git"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Image manipulation suite; snacks.nvim's image preview needs `magick`/`convert`
+brew "imagemagick"
+# Platform built on V8 to build network applications; several Mason LSP/formatter
+# packages (pyright, prettier, etc.) install themselves via npm
+brew "node"
 # Clone of ls with colorful output, file type icons, and more
 brew "lsd"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -29,6 +36,9 @@ brew "openssh"
 brew "ripgrep"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# CLI for the tree-sitter parsing library; nvim-treesitter's main branch needs
+# this to compile grammars (the plain "tree-sitter" formula is lib-only)
+brew "tree-sitter-cli"
 # Terminal multiplexer
 brew "tmux"
 # Shell extension to navigate your filesystem faster

@@ -44,3 +44,20 @@ opt.splitbelow = true
 opt.updatetime = 40
 
 opt.colorcolumn = "180"
+
+-- undo survives restarts
+opt.undofile = true
+
+-- power moves (see :help for each)
+opt.inccommand = "split" -- live preview of :s, with a results split
+vim.o.jumpoptions = "stack,view" -- jumplist behaves like a browser back button, restores scroll
+opt.splitkeep = "screen" -- text doesn't jump when a split opens
+vim.o.winborder = "rounded" -- global float border (0.11+); delete per-plugin border config
+
+-- quickfix / grep
+opt.grepprg = "rg --vimgrep --smart-case --hidden"
+opt.grepformat = "%f:%l:%c:%m"
+
+-- auto-session's own recommendation: without 'localoptions', filetype/highlighting
+-- can come back wrong after a session restore
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

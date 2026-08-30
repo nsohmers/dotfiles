@@ -39,3 +39,17 @@ keymap.set("n", "<leader>bn", "<cmd>bn<CR>", { desc = "Go to the next buffer" })
 keymap.set("n", "<leader>bp", "<cmd>bn<CR>", { desc = "Go to the previous buffer" })
 keymap.set("n", "<leader>bf", "<cmd>bf<CR>", { desc = "Go to the first buffer" })
 keymap.set("n", "<leader>bl", "<cmd>bl<CR>", { desc = "Go to the last buffer" })
+
+-- quickfix list navigation (populated by :grep, LSP references, diagnostics, etc.)
+keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
+keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Go to previous quickfix item" })
+
+-- toggle full diagnostic text below the line vs. truncated virtual text
+local diagnostics_virtual_lines = false
+keymap.set("n", "<leader>dv", function()
+  diagnostics_virtual_lines = not diagnostics_virtual_lines
+  vim.diagnostic.config({
+    virtual_lines = diagnostics_virtual_lines,
+    virtual_text = not diagnostics_virtual_lines,
+  })
+end, { desc = "Toggle diagnostic virtual lines" })

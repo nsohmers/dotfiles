@@ -123,7 +123,7 @@ return {
           padding = 2,
           max_width = 0,
           max_height = 0,
-          border = "rounded",
+          -- border comes from the global vim.o.winborder now
           win_options = {
             winblend = 0,
           },
@@ -151,7 +151,6 @@ return {
           min_height = { 5, 0.1 },
           -- optionally define an integer/float for the exact height of the preview window
           height = nil,
-          border = "rounded",
           win_options = {
             winblend = 0,
           },
@@ -166,20 +165,15 @@ return {
           max_height = { 10, 0.9 },
           min_height = { 5, 0.1 },
           height = nil,
-          border = "rounded",
           minimized_border = "none",
           win_options = {
             winblend = 0,
           },
         },
         -- Configuration for the floating SSH window
-        ssh = {
-          border = "rounded",
-        },
+        ssh = {},
         -- Configuration for the floating keymaps help window
-        keymaps_help = {
-          border = "rounded",
-        }
+        keymaps_help = {}
       })
 
       local keymap = vim.keymap -- for conciseness

@@ -4,14 +4,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
-    -- import mason
-    local mason = require("mason")
-
-    -- import mason-lspconfig
-    local mason_lspconfig = require("mason-lspconfig")
-
-    -- enable mason and configure icons
-    mason.setup({
+    require("mason").setup({
       ui = {
         icons = {
           package_installed = "✓",
@@ -21,15 +14,17 @@ return {
       },
     })
 
-    mason_lspconfig.setup({
-      -- list of servers for mason to install
+    -- automatic_enable calls vim.lsp.enable() for every installed server,
+    -- picking up whatever config was registered via vim.lsp.config() in lspconfig.lua
+    require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
         "clangd",
         "jdtls",
         "pyright",
-        "marksman"
+        "marksman",
       },
+      automatic_enable = true,
     })
   end,
 }

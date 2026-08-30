@@ -21,8 +21,8 @@ outer.bottom     = 8
 
 # --- app launchers ---
 alt-t = 'exec-and-forget open -na Ghostty'
-alt-f = 'exec-and-forget open -a Firefox'
-alt-e = 'exec-and-forget open -a Finder'
+alt-f = 'exec-and-forget /Applications/Firefox.app/Contents/MacOS/firefox --new-window'
+alt-e = 'exec-and-forget osascript -e "tell application \"Finder\" to make new Finder window" -e "tell application \"Finder\" to activate"'
 
 # --- focus ---
 alt-h = 'focus left'
@@ -39,7 +39,7 @@ alt-shift-l = 'move right'
 # --- window actions ---
 alt-u = 'fullscreen'
 alt-v = 'layout floating tiling'
-alt-shift-q = 'close'
+alt-q = 'close'
 
 # --- layout toggles (useful, i3 habits) ---
 alt-w = 'layout tiles horizontal vertical'
@@ -93,3 +93,16 @@ equal = 'resize smart +50'
 
 enter = 'mode main'
 esc = 'mode main'
+
+[[on-window-detected]]
+if.app-id = 'com.raycast.macos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = 'Info'
+run = 'layout floating'

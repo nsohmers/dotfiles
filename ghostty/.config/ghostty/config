@@ -4,7 +4,7 @@ font-size = 15
 
 theme = Catppuccin Mocha
 
-background-opacity = 0.8
+background-opacity = 0.9
 background-blur-radius = 20
 
 window-padding-x = 10
@@ -13,6 +13,12 @@ window-decoration = true
 macos-titlebar-style = tabs
 
 cursor-style = block
+
+# without this, macOS composes Option+letter into accented/special characters
+# instead of sending it as Alt, which is what tmux's M-h/j/k/l pane nav and
+# vim-tmux-navigator's <A-h/j/k/l> mappings both rely on
+macos-option-as-alt = true
+
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
