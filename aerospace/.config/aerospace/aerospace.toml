@@ -1,5 +1,10 @@
 # ~/.aerospace.toml
 
+config-version = 2
+# v1 auto-inferred this from the workspace bindings below; v2 dropped that inference,
+# so it's spelled out explicitly to keep workspaces 1-9 persistent as before.
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
 start-at-login = true
 
 # i3-like: new windows join the focused container
@@ -39,7 +44,7 @@ alt-shift-l = 'move right'
 # --- window actions ---
 alt-u = 'fullscreen'
 alt-v = 'layout floating tiling'
-alt-q = 'close'
+alt-q = 'close --quit-if-last-window' # otherwise the app stays resident with no windows, leaking RAM
 
 # --- layout toggles (useful, i3 habits) ---
 alt-w = 'layout tiles horizontal vertical'
