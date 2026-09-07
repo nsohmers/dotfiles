@@ -59,6 +59,15 @@ popup of most of these instead of coming back to this file.
 | `s` / `S` | Flash jump / Flash treesitter jump |
 | `-` | Open Oil (file explorer as a buffer) |
 
+### Typst (`.typ` files only)
+| Key | Action |
+|---|---|
+| `<leader>tv` | Toggle a live Typst preview (typst-preview.nvim) |
+
+Buffer-local to Typst files specifically so it can't shadow the global `<leader>t*` tab commands
+elsewhere. LSP (`tinymist`, via Mason) gives the usual `gd`/`K`/`<leader>ca`/etc. from the LSP
+table above; the preview is a separate, independent feature from the LSP.
+
 ### Git (gitsigns)
 | Key | Action |
 |---|---|
@@ -120,7 +129,7 @@ toggle key and you're back where you left off, even after `:qa`.
 | `<leader>wx` | Close split |
 | `<leader>w_` / `<leader>w\|` | Fullscreen split horizontally/vertically |
 | `<leader>sm` | Maximize/minimize the current split |
-| `<a-h/j/k/l>` | Move between splits (and tmux panes, seamlessly) |
+| `<C-A-h/j/k/l>` (Ctrl+Alt) | Move between splits (and tmux panes, seamlessly) — also works from inside a `:terminal` split (e.g. a shell or Claude Code running in one) |
 | `<leader>tc` / `<leader>tx` | New tab / close tab |
 | `<leader>tn` / `<leader>tp` | Next/previous tab |
 | `<leader>tf` | Open current buffer in a new tab |

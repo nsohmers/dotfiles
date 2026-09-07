@@ -105,3 +105,7 @@ if [ -f "/home/nsohmers/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/ns
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export PATH="$HOME/bin:$PATH"
+
+. "$HOME/.local/bin/env"
+
+export PATH="/Users/nsohmers/.pixi/bin:$PATH"

@@ -17,6 +17,8 @@ cd ~/dotfiles
 
 brew bundle          # installs stow, neovim, tmux, and everything else in Brewfile (for mac ofc)
 stow */              # symlinks every package into $HOME
+# NOTE: this is a deliberate no-op for firefox/ (a .stow-local-ignore prevents it) —
+# Firefox profile paths aren't stow-portable. See firefox/README.md to wire that up.
 
 # tmux's plugin manager doesn't bootstrap itself — one manual step:
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

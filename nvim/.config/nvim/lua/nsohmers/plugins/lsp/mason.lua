@@ -23,6 +23,7 @@ return {
         "jdtls",
         "pyright",
         "marksman",
+        "tinymist",
       },
       automatic_enable = true,
     })

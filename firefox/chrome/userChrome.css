@@ -1,0 +1,7 @@
+/* Only the pieces you actually wanted kept from the old full theme.
+   The rest of that theme (tab-bar hiding, sidebery mods, minimal toolbar
+   buttons, etc.) is still in hacks/ and in userChrome.full-theme.css.reference
+   if you ever want to bring more of it back — just add another @import line. */
+
+@import url(hacks/urlHighlight.css);
+@import url(hacks/minimal_text_fields.css);

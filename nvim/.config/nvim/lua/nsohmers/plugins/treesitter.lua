@@ -28,6 +28,7 @@ return {
       "query",
       "vimdoc",
       "c",
+      "typst",
     }
 
     require("nvim-treesitter").install(ensure_installed)

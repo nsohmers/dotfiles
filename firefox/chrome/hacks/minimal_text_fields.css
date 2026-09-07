@@ -32,6 +32,11 @@ See the above repository for updates as well as full license text. */
 #urlbar .urlbar-input-box,
 .searchbar-textbox > moz-input-box{ opacity: 0.6 }
 
+/* extension page-action icons (e.g. Tabliss) live in here too, as a sibling of
+   #identity-box — hide them permanently instead of letting them fade in on hover
+   like the rest of this file does; !important beats the hover rules below too */
+#page-action-buttons{ opacity: 0 !important; pointer-events: none; }
+
 #identity-box ~ *:hover,
 #tracking-protection-icon-container:hover, 
 #tracking-protection-icon-container ~ *:hover,

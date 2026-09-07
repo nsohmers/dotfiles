@@ -102,6 +102,11 @@ aren't real problems on this machine (see Gotchas).
   `~/dotfiles` and `~/Documents` because that's what actually exists on this machine (`~/Dev`,
   referenced by the old harpoon-era `auto-session` config, does not exist here). Update it if the
   project layout changes.
+- **`firefox/` is not a real stow package** — Firefox profile folders are named with a random hash
+  per-machine/per-profile (e.g. `36fpuoxe.default-release`), so nothing in there can be mirrored by
+  plain stow. A `.stow-local-ignore` makes `stow firefox` (and `stow */`) a deliberate no-op —
+  don't remove it, or a future sweep will create `~/chrome` and `~/user.js` directly in `$HOME`.
+  The real wiring is two manual symlinks into the live profile; see `firefox/README.md`.
 
 ## Where to look first
 
