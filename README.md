@@ -1,8 +1,4 @@
-ostty 1.3.1 # My Dotfiles
-
-Personal macOS configuration — Neovim, tmux, Ghostty, AeroSpace, zsh, and a few others — managed
-with [GNU Stow](https://www.gnu.org/software/stow/). Each top-level directory is a stow package
-that mirrors `$HOME` (e.g. `nvim/.config/nvim/...` → `~/.config/nvim/...`).
+# Dotfiles
 
 ---
 
