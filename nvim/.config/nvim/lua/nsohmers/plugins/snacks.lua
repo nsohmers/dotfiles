@@ -52,6 +52,8 @@ return {
     { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "Find document symbols" },
     { "<leader>fc", function() Snacks.picker.grep_word() end, desc = "Find string under cursor in cwd" },
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Find files in buffers" },
-    { "<leader>tt", function() Snacks.terminal.toggle() end, desc = "Toggle floating terminal" },
+    -- mode = {"n","t"}: without "t" this only closes the terminal from outside it,
+    -- since lazy.nvim's `keys` defaults to normal mode only.
+    { "<leader>tt", function() Snacks.terminal.toggle() end, mode = { "n", "t" }, desc = "Toggle floating terminal" },
   },
 }

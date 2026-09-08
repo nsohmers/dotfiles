@@ -1,10 +1,10 @@
 return {
   "folke/sidekick.nvim",
   opts = {
-    -- Next Edit Suggestions (ghost-text edit hints) are on by default and default to <Tab> to
-    -- accept, which blink.cmp already owns for completion cycling. Left off rather than half-wire
-    -- a second feature onto the same key; the CLI terminal below is the part we actually use.
-    nes = { enabled = false },
+    -- Next Edit Suggestions (AI ghost-text edit hints, accepted with <Tab>). blink.cmp already
+    -- owns <Tab> for completion cycling, so the two are chained in blink.lua's keymap instead of
+    -- fighting over the key: cmp menu selection first, then nes_jump_or_apply, then normal <Tab>.
+    nes = { enabled = true },
     cli = {
       mux = {
         backend = "tmux", -- agent terminals survive nvim restarts via a tmux pane

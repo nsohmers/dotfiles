@@ -25,7 +25,7 @@ popup of most of these instead of coming back to this file.
 | `<leader>fc` | Grep the word under cursor |
 | `<leader>fs` | Find document symbols |
 | `<leader>fb` | Find open buffers |
-| `<leader>tt` | Toggle a floating terminal |
+| `<leader>tt` | Toggle a floating terminal — also closes it from inside (terminal mode) |
 
 ### LSP (active once a language server attaches to the buffer)
 | Key | Action |
@@ -90,8 +90,10 @@ table above; the preview is a separate, independent feature from the LSP.
 | `<leader>af` | Send the whole file to the focused agent |
 | `<leader>ap` | Pick from the prompt library (explain, fix, write tests, …) |
 
-Next Edit Suggestions (inline ghost-text, Copilot-style) are turned off — its default accept key
-is `<Tab>`, which blink.cmp already owns for completion. See "Using the agent terminal" below.
+Next Edit Suggestions (inline ghost-text, Copilot-style) are on. Its accept key is also `<Tab>`,
+which blink.cmp already owns for completion cycling, so the two are chained: cmp menu selection
+takes priority if the menu is open, then a pending NES suggestion, then normal `<Tab>` (indent/etc)
+if neither applies. See "Using the agent terminal" below.
 
 #### Using the agent terminal
 `<leader>ai`/`<leader>ac`/`<leader>aa` open a real, interactive CLI session (literally `claude` or
