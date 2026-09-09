@@ -107,6 +107,10 @@ aren't real problems on this machine (see Gotchas).
   plain stow. A `.stow-local-ignore` makes `stow firefox` (and `stow */`) a deliberate no-op —
   don't remove it, or a future sweep will create `~/chrome` and `~/user.js` directly in `$HOME`.
   The real wiring is two manual symlinks into the live profile; see `firefox/README.md`.
+- **AeroSpace's `after-startup-command` only fires when the AeroSpace process itself starts**, not
+  on `aerospace reload-config` — this is how `borders` (JankyBorders, the focused-window outline)
+  gets launched. If you change its options and just reload, nothing happens; either fully restart
+  AeroSpace or run the `exec-and-forget` command's payload directly to see a change immediately.
 
 ## Where to look first
 

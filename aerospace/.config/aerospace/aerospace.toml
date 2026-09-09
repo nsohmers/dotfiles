@@ -7,6 +7,14 @@ persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 start-at-login = true
 
+# JankyBorders: draws a colored border around the focused window (macOS has no
+# native equivalent for a tiling WM). Tied to AeroSpace's own lifecycle rather
+# than `brew services` so there's one source of truth for when it runs.
+# Colors match the Catppuccin Mocha theme used elsewhere (Ghostty, nvim colorscheme).
+after-startup-command = [
+  'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xffb4befe inactive_color=0xff45475a width=5.0 style=round'
+]
+
 # i3-like: new windows join the focused container
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'

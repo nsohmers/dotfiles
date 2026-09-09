@@ -1,4 +1,5 @@
 tap "nikitabobko/tap"
+tap "FelixKratz/formulae"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -15,6 +16,8 @@ brew "fzf"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# JankyBorders: colored border around the focused window (used with AeroSpace)
+brew "borders", trusted: true
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Simple terminal UI for git commands
