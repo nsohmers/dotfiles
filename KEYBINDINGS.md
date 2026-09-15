@@ -58,6 +58,7 @@ popup of most of these instead of coming back to this file.
 | `<leader>z` (normal or visual) | Format file or selection (conform.nvim) |
 | `s` / `S` | Flash jump / Flash treesitter jump |
 | `-` | Open Oil (file explorer as a buffer) |
+| `<leader>j` | Toggle split/join the node under cursor (treesj) |
 
 ### Typst (`.typ` files only)
 | Key | Action |
@@ -169,6 +170,7 @@ toggle key and you're back where you left off, even after `:qa`.
 - Grapple / pickers / terminal: [nvim/.../plugins/grapple.lua](nvim/.config/nvim/lua/nsohmers/plugins/grapple.lua), [snacks.lua](nvim/.config/nvim/lua/nsohmers/plugins/snacks.lua)
 - LSP: [nvim/.../plugins/lsp/lspconfig.lua](nvim/.config/nvim/lua/nsohmers/plugins/lsp/lspconfig.lua)
 - Surround/textobjects: [nvim/.../plugins/mini.lua](nvim/.config/nvim/lua/nsohmers/plugins/mini.lua)
+- Split/join: [nvim/.../plugins/treesj.lua](nvim/.config/nvim/lua/nsohmers/plugins/treesj.lua)
 - Git: [nvim/.../plugins/gitsigns.lua](nvim/.config/nvim/lua/nsohmers/plugins/gitsigns.lua)
 - Agents: [nvim/.../plugins/sidekick.lua](nvim/.config/nvim/lua/nsohmers/plugins/sidekick.lua)
 - Quickfix/diagnostics toggles, windows/tabs/buffers: [nvim/.../core/keymaps.lua](nvim/.config/nvim/lua/nsohmers/core/keymaps.lua)

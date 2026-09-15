@@ -119,3 +119,10 @@ run = 'layout floating'
 if.app-id = 'com.apple.finder'
 if.window-title-regex-substring = 'Info'
 run = 'layout floating'
+
+# Quick Note's floating panel - without this, AeroSpace tiles it into whatever
+# workspace was active when it popped up, so clicking it later "teleports" you
+# to that workspace instead of just focusing the note.
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = 'layout floating'

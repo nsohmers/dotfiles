@@ -7,7 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git)"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
@@ -15,6 +15,11 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+# Loaded before the zinit block below so that fzf-tab's own Tab-completion
+# binding (set when it loads) wins over plain fzf's — otherwise fzf-tab's Tab
+# binding gets immediately clobbered by this, since it used to run after it.
+eval "$(fzf --zsh)"
 
 # Add in Powerlevel 10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -24,6 +29,8 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
+# must load after zsh-syntax-highlighting (upstream's own requirement)
+zinit light zsh-users/zsh-history-substring-search
 
 autoload -Uz compinit
 compinit
@@ -31,14 +38,20 @@ compinit
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 
-eval `ssh-agent -s` >/dev/null 2>&1
-for key in ~/.ssh/*_ed(N); do
-  ssh-add "$key" >/dev/null 2>&1
-done
+# Linux only — macOS already runs its own persistent ssh-agent via launchd
+# (com.openssh.ssh-agent), auto-wired to $SSH_AUTH_SOCK in every shell. This
+# block spawned a brand new agent on every single shell instead of reusing it,
+# leaking dozens of orphaned ssh-agent processes over time.
+# eval `ssh-agent -s` >/dev/null 2>&1
+# for key in ~/.ssh/*_ed(N); do
+#   ssh-add "$key" >/dev/null 2>&1
+# done
 
-ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.79.71.102" >/dev/null 2>&1
-ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.99.71.102" >/dev/null 2>&1
-ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.9.71.102" >/dev/null 2>&1
+# Linux only — /home/nsohmers doesn't exist on macOS ($HOME is /Users/nsohmers),
+# so these silently did nothing on every shell startup.
+# ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.79.71.102" >/dev/null 2>&1
+# ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.99.71.102" >/dev/null 2>&1
+# ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.9.71.102" >/dev/null 2>&1
 
 EDITOR='nvim'
 
@@ -52,24 +65,6 @@ alias lsa="lsd -AFhX --group-directories-first"
 alias lst="lsd -AFhX --tree --depth 2"
 
 alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
-alias google-java-format='java -jar ~/.m2/repository/com/google/googlejavaformat/google-java-format/HEAD-SNAPSHOT/google-java-format-HEAD-SNAPSHOT-all-deps.jar'
-
-# Display Pokemon-colorscripts
-# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
-#pokemon-colorscripts --no-title -s -r
-
-### From this line is for pywal-colors
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-# Not supported in the "fish" shell.
-#(cat ~/.cache/wal/sequences &)
-
-# Alternative (blocks terminal for 0-3ms)
-#cat ~/.cache/wal/sequences
-
-# To add support for TTYs this line can be optionally added.
-#source ~/.cache/wal/colors-tty.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -78,10 +73,19 @@ bindkey -e
 bindkey '^p' hist_search-backward
 bindkey '^n' hist_search-forward
 
+# up/down arrow filters history by what's already typed instead of just cycling.
+# bound on both emacs (bindkey -e above) and vi keymaps (viins/vicmd) since
+# zsh-vi-mode switches between those live as you type, not the emacs one.
+# Plain escape sequences instead of $terminfo[kcuu1]/[kcud1] — that array came up
+# empty in testing (terminfo not populated in every environment), these don't.
+for keymap in emacs viins vicmd; do
+  bindkey -M "$keymap" '^[[A' history-substring-search-up
+  bindkey -M "$keymap" '^[[B' history-substring-search-down
+done
+
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 
 setopt appendhistory
 setopt sharehistory
@@ -93,13 +97,11 @@ setopt hist_save_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
 
-eval "$(fzf --zsh)"
-source <(fzf --zsh)
-
 eval "$(zoxide init --cmd cd zsh)"
 
-export PATH="$PATH:/home/nsohmers/.local/bin"
-if [ -f "/home/nsohmers/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/nsohmers/.config/fabric/fabric-bootstrap.inc"; fi
+# Linux only — /home/nsohmers doesn't exist on macOS ($HOME is /Users/nsohmers).
+# export PATH="$PATH:/home/nsohmers/.local/bin"
+# if [ -f "/home/nsohmers/.config/fabric/fabric-bootstrap.inc" ]; then . "/home/nsohmers/.config/fabric/fabric-bootstrap.inc"; fi
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

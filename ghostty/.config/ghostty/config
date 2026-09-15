@@ -25,3 +25,10 @@ shell-integration-features = cursor,sudo,title
 copy-on-select = clipboard
 scrollback-limit = 10000
 confirm-close-surface = false
+
+# without this, closing a window's last surface leaves Ghostty running with zero
+# windows (visible as repeated "ghostty" processes piling up in Activity Monitor) —
+# this makes it quit regardless of *how* the window was closed (Cmd+W, red button,
+# AeroSpace's alt-q), unlike AeroSpace's own close --quit-if-last-window flag which
+# only helps when you specifically use alt-q
+quit-after-last-window-closed = true

@@ -28,6 +28,9 @@ return {
       "query",
       "vimdoc",
       "c",
+      "cpp",
+      "python",
+      "java",
       "typst",
     }
 
