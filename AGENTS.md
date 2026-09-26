@@ -71,7 +71,7 @@ aren't real problems on this machine (see Gotchas).
   work (e.g. `mini.ai` and `nvim-treesitter-textobjects` both providing `af`/`if`), resolve it —
   don't just add the new one alongside the old.
 - Don't add plugins/binaries/automation beyond what's asked. Several things from "The Ultimate Dev
-  Setup" doc this config is loosely based on were deliberately **not** added (`nvim-dap`, `treesj`,
+  Setup" doc this config is loosely based on were deliberately **not** added (`nvim-dap`,
   `git rerere`/`absorb`, the broader CLI baseline like `delta`/`atuin`/`mise`) — ask before adding
   scope, don't assume more is better.
 - Lua files: no comments except where they explain a genuinely non-obvious *why* (a workaround, a
