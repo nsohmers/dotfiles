@@ -103,10 +103,18 @@ aren't real problems on this machine (see Gotchas).
   referenced by the old harpoon-era `auto-session` config, does not exist here). Update it if the
   project layout changes.
 - **`firefox/` is not a real stow package** — Firefox profile folders are named with a random hash
-  per-machine/per-profile (e.g. `36fpuoxe.default-release`), so nothing in there can be mirrored by
-  plain stow. A `.stow-local-ignore` makes `stow firefox` (and `stow */`) a deliberate no-op —
-  don't remove it, or a future sweep will create `~/chrome` and `~/user.js` directly in `$HOME`.
-  The real wiring is two manual symlinks into the live profile; see `firefox/README.md`.
+  per-machine/per-profile, so nothing in `chrome/`/`user.js`/`relink-profile.sh` can be mirrored by
+  plain stow. A `.stow-local-ignore` makes those a deliberate no-op for `stow firefox` — don't
+  remove it. The `Library/LaunchAgents/` plist in that same directory IS normally stow-mirrored,
+  though (it's a portable path).
+- **Firefox silently replaced its own default profile in Sept 2026**, abandoning the one the
+  `chrome`/`user.js` symlinks pointed at (left it completely empty, no data recoverable) after
+  updating to `155.0.1`. Root cause suspected to be `browser.profiles.enabled` (from Betterfox's
+  Peskyfox section) — overridden back to `false` in `user.js`'s own "MY OVERRIDES" section. Fixed
+  structurally either way: `firefox/relink-profile.sh` re-resolves the current default-release
+  profile from `profiles.ini` on every run rather than assuming a fixed path, run automatically by
+  a LaunchAgent (`com.nsohmers.firefox-relink`) at login and whenever `profiles.ini` changes. See
+  `firefox/README.md` for the full incident writeup.
 - **AeroSpace's `after-startup-command` only fires when the AeroSpace process itself starts**, not
   on `aerospace reload-config` — this is how `borders` (JankyBorders, the focused-window outline)
   gets launched. If you change its options and just reload, nothing happens; either fully restart

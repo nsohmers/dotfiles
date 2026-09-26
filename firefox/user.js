@@ -218,6 +218,13 @@ user_pref("findbar.highlightAll", true);
 user_pref("media.peerconnection.ice.default_address_only", true);
 user_pref("media.peerconnection.ice.no_host", true);
 
+// Overrides Peskyfox's own `user_pref("browser.profiles.enabled", true)` above
+// (later user_pref wins). Suspected cause of Firefox silently abandoning and
+// recreating its default profile in Sept 2026 — this still-actively-developed
+// profile-switcher subsystem is exactly the kind of feature prone to migration
+// bugs on update. Not needed for anything we actually use.
+user_pref("browser.profiles.enabled", false);
+
 /****************************************************************************
  * END: BETTERFOX                                                           *
 ****************************************************************************/

@@ -29,8 +29,6 @@ brew "imagemagick"
 # Platform built on V8 to build network applications; several Mason LSP/formatter
 # packages (pyright, prettier, etc.) install themselves via npm
 brew "node"
-# Clone of ls with colorful output, file type icons, and more
-brew "lsd"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # OpenBSD freely-licensed SSH connectivity tools

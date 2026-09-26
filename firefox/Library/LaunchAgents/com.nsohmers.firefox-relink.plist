@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.nsohmers.firefox-relink</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/nsohmers/dotfiles/firefox/relink-profile.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/nsohmers/Library/Application Support/Firefox/profiles.ini</string>
+    </array>
+    <key>StandardOutPath</key>
+    <string>/Users/nsohmers/Library/Logs/firefox-relink.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/nsohmers/Library/Logs/firefox-relink.log</string>
+</dict>
+</plist>

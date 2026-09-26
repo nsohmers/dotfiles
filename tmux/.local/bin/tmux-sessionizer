@@ -16,19 +16,27 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+session_name="$selected_name"
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+# Session names are global, so disambiguate projects with the same basename.
+if tmux has-session -t="$session_name" 2>/dev/null; then
+    session_path=$(tmux display-message -p -t="$session_name" '#{pane_current_path}')
+    if [[ "$session_path" != "$selected" ]]; then
+        session_name="$(printf '%s' "$selected" | sed "s#^$HOME/##; s#[^[:alnum:]_-]#_#g")"
+    fi
+fi
+
+if [[ -z $TMUX ]] && ! tmux list-sessions >/dev/null 2>&1; then
+    tmux new-session -s "$session_name" -c "$selected"
     exit 0
 fi
 
-if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+if ! tmux has-session -t="$session_name" 2>/dev/null; then
+    tmux new-session -ds "$session_name" -c "$selected"
 fi
 
 if [[ -z $TMUX ]]; then
-    tmux attach-session -t "$selected_name"
+    tmux attach-session -t "$session_name"
 else
-    tmux switch-client -t "$selected_name"
+    tmux switch-client -t "$session_name"
 fi

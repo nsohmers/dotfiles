@@ -53,18 +53,25 @@ gpgconf --launch gpg-agent
 # ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.99.71.102" >/dev/null 2>&1
 # ssh-keygen -f "/home/nsohmers/.ssh/known_hosts" -R "10.9.71.102" >/dev/null 2>&1
 
-EDITOR='nvim'
+export EDITOR='nvim'
+export VISUAL="$EDITOR"
 
-alias push="git push origin HEAD:refs/for/main"
+# Gerrit-specific push command kept for reference; use an explicit command if
+# this workflow is needed again rather than overriding the normal `push`.
+# alias gpush="git push origin HEAD:refs/for/main"
 
 alias vim="nvim"
 
-alias ls="lsd -FhX --group-directories-first"
-alias ll="lsd -FhXlA --group-directories-first"
-alias lsa="lsd -AFhX --group-directories-first"
-alias lst="lsd -AFhX --tree --depth 2"
+alias ls="eza --classify always --sort ext --group-directories-first"
+alias ll="eza --classify always --sort ext --long --all --group-directories-first"
+alias lsa="eza --classify always --sort ext --all --group-directories-first"
+alias lst="eza --classify always --sort ext --all --tree --level=2"
 
-alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
+inv() {
+  local -a files
+  files=("${(@f)$(fzf -m --preview='bat --color=always {}')}")
+  (( ${#files} )) && nvim -- "${files[@]}"
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
